@@ -12,15 +12,16 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background: linear-gradient(135deg,
+            background: linear-gradient(135deg, 
                 rgb(255, 102, 178),
-                rgb(149, 0, 255),
-                rgb(235, 230, 233),
-                rgb(149, 0, 255),
+                rgb(149, 0, 255), 
+                rgb(235, 230, 233), 
+                rgb(149, 0, 255), 
                 rgb(255, 102, 178)
             );
             background-size: 500% 500%;
             animation: educateGradient 5s ease infinite;
+            transition: background 0.5s ease; 
         }
 
         @keyframes educateGradient {
@@ -42,11 +43,56 @@
         button:hover {
             transform: scale(1.1); 
         }
+
+        .length-display {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ffffff;
+            border-radius: 5px;
+        }
+
+        .input-container {
+            margin-top: 30px;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .highlight-box {
+            width: 200px;
+            height: 100px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            border-radius: 10px;
+            transition: box-shadow 0.3s ease; 
+        }
+        .highlight-box:hover {
+            box-shadow: 0 0 20px rgba(0, 128, 255, 0.7); 
+        }
     </style>
 </head>
 <body>
 
-    <button onclick="changeBackgroundGradient()">Сменить фон на градиент</button>
+    <button onclick="toggleBackground()">Переключить фон</button>
+
+    <div class="input-container">
+        <input type="text" id="textInput" placeholder="Введите текст">
+        <p class="length-display">Длинная текста: <span id="textLength">0</span> </p>
+    </div>
+
+    <div class="highlight-box">Milka</div>
+
+    <script src="./js/script.js"></script>
 
 </body>
 </html>

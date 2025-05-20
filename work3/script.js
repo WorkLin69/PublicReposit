@@ -65,21 +65,4 @@
             formOutput.innerHTML = 'Отправка формы отменена!';
         });
 
-        // 7. Кастомное событие
-        const customEventButton = document.getElementById('customEventButton');
-        const customOutput = document.getElementById('customOutput');
-        const customEvent = new CustomEvent('myCustomEvent', {
-            detail: { message: 'Это кастомное событие!' },
-            bubbles: true,
-            cancelable: true
-        });
-        document.addEventListener('myCustomEvent', (event) => {
-            customOutput.innerHTML = `
-                Кастомное событие: ${event.type}<br>
-                Сообщение: ${event.detail.message}<br>
-                Всплывает: ${event.bubbles}
-            `;
-        });
-        customEventButton.addEventListener('click', () => {
-            document.dispatchEvent(customEvent);
-        });
+   

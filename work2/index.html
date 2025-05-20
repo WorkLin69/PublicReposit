@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <style>
+        body {
+            font-size: 16px;
+        }
+        #textBlock {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 20px;
+        }
+        .error {
+            border: 2px solid red;
+        }
+        form {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="toggleTextSize()">Переключить размер текста</button>
+    <div id="textBlock"></div>
+    <form>
+        <input type="text" id="inputField" placeholder="Введите данные">
+        <button type="submit" onclick="validateInput(event)">Отправить</button>
+    </form>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Работа с событиями</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+            text-align: center;
+        }
+        button, a, input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .nested-container {
+            background-color: lightblue;
+            padding: 20px;
+        }
+        .mouse-area {
+            width: 200px;
+            height: 100px;
+            background-color: #f0f0f0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Работа с событиями</h2>
+
+    <!-- Кнопка для события click -->
+    <div class="container">
+        <button id="clickButton">Нажми меня</button>
+        <p id="clickOutput"></p>
+    </div>
+
+    <!-- Ссылка для события mouseover и отмены действия -->
+    <div class="container">
+        <a id="myLink" href="https://example.com">Наведи и кликни</a>
+        <p id="linkOutput"></p>
+    </div>
+
+    <!-- Поле ввода для события keypress -->
+    <div class="container">
+        <input type="text" id="keyInput" placeholder="Нажми клавишу">
+        <p id="keyOutput"></p>
+    </div>
+
+    <!-- Вложенные элементы для остановки всплытия -->
+    <div class="container nested-container" id="parent">
+        <button id="child">Кнопка внутри div</button>
+        <p id="nestedOutput"></p>
+    </div>
+
+    <!-- Область для отслеживания координат мыши -->
+    <div class="container">
+        <div class="mouse-area" id="mouseArea">Двигай мышь здесь</div>
+        <p id="mouseOutput"></p>
+    </div>
+
+    <!-- Форма с отменой действия по умолчанию -->
+    <div class="container">
+        <form id="myForm">
+            <input type="text" placeholder="Введите текст" id="formInput">
+            <button type="submit">Отправить</button>
+        </form>
+        <p id="formOutput"></p>
+    </div>
+
+    <!-- Кнопка для кастомного события -->
+    <div class="container">
+        <button id="customEventButton">Запустить кастомное событие</button>
+        <p id="customOutput"></p>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простая форма и Drag-and-Drop</title>
+    <style>
+        body { font-family: Arial; padding: 10px; }
+        .error { color: red; }
+        #dropZone { border: 2px dashed #4CAF50; padding: 10px; margin: 10px 0; }
+        #dropZone.dragover { background: #e0f7fa; }
+    </style>
+</head>
+<body>
+    <!-- Форма с кастомной валидацией -->
+    <div>
+        <h2>Форма</h2>
+        <form id="myForm">
+            <div>
+                <label>Имя (мин. 3 символа):</label><br>
+                <input type="text" id="username" required><br>
+                <span id="usernameError" class="error"></span>
+            </div>
+            <div>
+                <label>Email:</label><br>
+                <input type="email" id="email" required><br>
+                <span id="emailError" class="error"></span>
+            </div>
+            <div>
+                <label>Возраст (18-120):</label><br>
+                <input type="number" id="age" required><br>
+                <span id="ageError" class="error"></span>
+            </div>
+            <button type="submit">Отправить</button>
+        </form>
+        <p id="formOutput"></p>
+    </div>
+
+    <!-- Drag-and-Drop зона -->
+    <div>
+        <h2>Drag-and-Drop</h2>
+        <div id="dropZone">Перетащите файлы</div>
+        <p id="fileOutput"></p>
+    </div>
+
+  
+    <div>
+        <h2>Текстовое поле</h2>
+        <input type="text" id="textField" placeholder="Введите текст">
+        <p id="textOutput"></p>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -45,7 +45,7 @@
             opacity: 0;
         }
         .gallery-item:hover img {
-            opacity: 0.7; /* Плавное затемнение */
+            opacity: 0.1; /* Плавное затемнение */
         }
         .gallery-item:hover .caption {
             transform: translateY(0);
@@ -111,7 +111,6 @@
     <h2>Кнопка с состояниями</h2>
     <button id="stateButton">Нажми меня</button>
 
-
     <h2>Слайдер изображений</h2>
     <div class="slider">
         <div class="slider-images" id="sliderImages"></div>
@@ -121,92 +120,6 @@
         <button onclick="nextSlide()">Следующий</button>
     </div>
 
-    <script>
-        // Динамическая галерея
-        const gallery = document.getElementById('gallery');
-        const imageData = [
-            { src: 'https://via.placeholder.com/200?text=Image1', caption: 'Изображение 1' },
-            { src: 'https://via.placeholder.com/200?text=Image2', caption: 'Изображение 2' },
-            { src: 'https://via.placeholder.com/200?text=Image3', caption: 'Изображение 3' },
-            { src: 'https://via.placeholder.com/200?text=Image4', caption: 'Изображение 4' }
-        ];
-
-        imageData.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'gallery-item';
-            div.innerHTML = `
-                <img src="" data-src="${item.src}" class="lazy" loading="lazy" alt="${item.caption}">
-                <div class="caption">${item.caption}</div>
-            `;
-            gallery.appendChild(div);
-        });
-
-        // Ленивая загрузка
-        const images = document.querySelectorAll('.lazy');
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.getAttribute('data-src');
-                    img.classList.remove('lazy');
-                    observer.unobserve(img);
-                }
-            });
-        }, { rootMargin: '50px' });
-
-        images.forEach(img => observer.observe(img));
-
-        // Кнопка с состояниями
-    const stateButton = document.getElementById('stateButton');
-
-        stateButton.addEventListener('click', () => {
-            stateButton.textContent = 'Нажата!';
-            setTimeout(() => {
-                stateButton.textContent = 'Нажми меня';
-            }, 500);
-        });
-
-       
-
-        // Слайдер
-        const sliderImages = document.getElementById('sliderImages');
-        const slideData = [
-            'https://via.placeholder.com/600x400?text=Slide1',
-            'https://via.placeholder.com/600x400?text=Slide2',
-            'https://via.placeholder.com/600x400?text=Slide3'
-        ];
-        let currentSlide = 0;
-
-        slideData.forEach(src => {
-            const img = document.createElement('img');
-            img.className = 'slider-image';
-            img.src = src;
-            sliderImages.appendChild(img);
-        });
-
-        function updateSlide() {
-            sliderImages.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slideData.length;
-            updateSlide();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slideData.length) % slideData.length;
-            updateSlide();
-        }
-
-        // Автоматическая прокрутка
-        setInterval(nextSlide, 3000);
-
-        // Обработка переходов
-        sliderImages.addEventListener('transitionend', () => {
-            if (currentSlide === slideData.length) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = slideData.length - 1;
-            updateSlide();
-        });
-    </script>
+    <script src="./script.js"></script>
 </body>
 </html>

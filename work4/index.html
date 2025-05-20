@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея и Слайдер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .gallery-item {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border: 2px solid #ccc;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            opacity: 0;
+        }
+        .gallery-item:hover img {
+            opacity: 0.7; /* Плавное затемнение */
+        }
+        .gallery-item:hover .caption {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .placeholder {
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+        #stateButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #stateButton:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        #stateButton:active {
+            background-color: #3d8b40;
+            transform: scale(0.95);
+        }
+        .slider {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .slider-images {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+        .slider-image {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slider-buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .slider-buttons button {
+            padding: 5px 10px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Галерея изображений</h2>
+    <div class="gallery" id="gallery"></div>
+
+    <h2>Кнопка с состояниями</h2>
+    <button id="stateButton">Нажми меня</button>
+
+
+    <h2>Слайдер изображений</h2>
+    <div class="slider">
+        <div class="slider-images" id="sliderImages"></div>
+    </div>
+    <div class="slider-buttons">
+        <button onclick="prevSlide()">Предыдущий</button>
+        <button onclick="nextSlide()">Следующий</button>
+    </div>
+
+    <script>
+        // Динамическая галерея
+        const gallery = document.getElementById('gallery');
+        const imageData = [
+            { src: 'https://via.placeholder.com/200?text=Image1', caption: 'Изображение 1' },
+            { src: 'https://via.placeholder.com/200?text=Image2', caption: 'Изображение 2' },
+            { src: 'https://via.placeholder.com/200?text=Image3', caption: 'Изображение 3' },
+            { src: 'https://via.placeholder.com/200?text=Image4', caption: 'Изображение 4' }
+        ];
+
+        imageData.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            div.innerHTML = `
+                <img src="" data-src="${item.src}" class="lazy" loading="lazy" alt="${item.caption}">
+                <div class="caption">${item.caption}</div>
+            `;
+            gallery.appendChild(div);
+        });
+
+        // Ленивая загрузка
+        const images = document.querySelectorAll('.lazy');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.getAttribute('data-src');
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            });
+        }, { rootMargin: '50px' });
+
+        images.forEach(img => observer.observe(img));
+
+        // Кнопка с состояниями
+    const stateButton = document.getElementById('stateButton');
+
+        stateButton.addEventListener('click', () => {
+            stateButton.textContent = 'Нажата!';
+            setTimeout(() => {
+                stateButton.textContent = 'Нажми меня';
+            }, 500);
+        });
+
+       
+
+        // Слайдер
+        const sliderImages = document.getElementById('sliderImages');
+        const slideData = [
+            'https://via.placeholder.com/600x400?text=Slide1',
+            'https://via.placeholder.com/600x400?text=Slide2',
+            'https://via.placeholder.com/600x400?text=Slide3'
+        ];
+        let currentSlide = 0;
+
+        slideData.forEach(src => {
+            const img = document.createElement('img');
+            img.className = 'slider-image';
+            img.src = src;
+            sliderImages.appendChild(img);
+        });
+
+        function updateSlide() {
+            sliderImages.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideData.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideData.length) % slideData.length;
+            updateSlide();
+        }
+
+        // Автоматическая прокрутка
+        setInterval(nextSlide, 3000);
+
+        // Обработка переходов
+        sliderImages.addEventListener('transitionend', () => {
+            if (currentSlide === slideData.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slideData.length - 1;
+            updateSlide();
+        });
+    </script>
+</body>
+</html>

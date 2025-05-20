@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление окном и адаптивность</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .buttons, .browser-info, .nav-menu, .layout-info {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #8800ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #9145a0;
+        }
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .nav-menu ul li {
+            padding: 10px;
+            background: #f0f0f0;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .nav-menu ul li:hover {
+            background: #ddd;
+        }
+        .mobile-layout {
+            flex-direction: column;
+        }
+        .desktop-layout {
+            display: flex;
+            justify-content: space-between;
+        }
+        .layout-info {
+            text-align: center;
+            padding: 10px;
+            background: #e0e0e0;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .desktop-layout {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">
+            <h2>Управление окном</h2>
+            <button id="fullScreenBtn">Во весь экран</button>
+            <button id="exitFullScreenBtn">Выход из полноэкранного режима</button>
+        </div>
+
+        <div class="browser-info">
+            <h2>Информация о браузере</h2>
+            <p id="browserOutput"></p>
+        </div>
+
+        <div class="nav-menu">
+            <h2>Навигационное меню</h2>
+            <ul id="navList">
+                <li data-url="#section1">Раздел 1</li>
+                <li data-url="#section2">Раздел 2</li>
+                <li data-url="#section3">Раздел 3</li>
+            </ul>
+            <button id="backBtn">Назад</button>
+            <p>Текущий URL: <span id="currentURL"></span></p>
+        </div>
+
+        <div class="layout-info" id="layoutInfo">
+            <p>Ширина экрана: <span id="screenWidth"></span>px</p>
+            <p>Ориентация: <span id="orientation"></span></p>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

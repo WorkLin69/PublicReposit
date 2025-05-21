@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Приложения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #8E2DE2;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(142, 45, 226, 0.1);
+        }
+        h2 {
+            color: #8E2DE2;
+            margin-top: 0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button, select, input[type="color"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover, select:hover, input[type="color"]:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #A349F5, #6A00FF);
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+        #gameInfo {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Часы на Canvas -->
+    <div class="section">
+        <h2>Часы</h2>
+        <canvas id="clockCanvas" width="300" height="300"></canvas>
+    </div>
+
+    <!-- Мини-игра "Поймай объект" -->
+    <div class="section">
+        <h2>Мини-игра: Поймай объект</h2>
+        <div id="gameInfo">Очки: <span id="score">0</span> | Время: <span id="timeLeft">30</span> | Уровень: <span id="level">1</span></div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <button onclick="startGame()">Начать игру</button>
+    </div>
+
+    <!-- Графический редактор -->
+    <div class="section">
+        <h2>Графический редактор</h2>
+        <div>
+            <input type="color" id="brushColor" value="#000000">
+            <select id="brushSize">
+                <option value="2">2px</option>
+                <option value="5">5px</option>
+                <option value="10">10px</option>
+            </select>
+            <select id="tool">
+                <option value="line">Линия</option>
+                <option value="rect">Прямоугольник</option>
+                <option value="circle">Круг</option>
+            </select>
+            <button onclick="saveDrawing()">Сохранить в PNG</button>
+        </div>
+        <canvas id="editorCanvas" width="400" height="400"></canvas>
+    </div>
+
+    <!-- Диаграмма данных -->
+    <div class="section">
+        <h2>Столбчатая диаграмма</h2>
+        <canvas id="chartCanvas" width="400" height="300"></canvas>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

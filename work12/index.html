@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамическая таблица, Дерево, Сортировка и Конструктор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #ff00ee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .tree ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        .tree li {
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .tree .collapsed > ul {
+            display: none;
+        }
+        .tree .expanded > ul {
+            display: block;
+        }
+        .sortable-list {
+            list-style: none;
+            padding: 0;
+        }
+        .sortable-list li {
+            padding: 10px;
+            background: #f0f0f0;
+            margin: 5px 0;
+        }
+        .block-container {
+            min-height: 200px;
+            border: 2px dashed #ccc;
+            padding: 10px;
+        }
+        .block {
+            padding: 15px;
+            margin: 10px 0;
+            background: #e0e0e0;
+            cursor: move;
+        }
+        .block img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Динамическая таблица -->
+    <div class="section">
+        <h2>Динамическая таблица</h2>
+        <button onclick="addRow()">Добавить строку</button>
+        <button onclick="removeRow()">Удалить последнюю строку</button>
+        <table id="dynamicTable">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Значение</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Дерево каталогов -->
+    <div class="section">
+        <h2>Дерево каталогов</h2>
+        <button onclick="addNode()">Добавить узел</button>
+        <button onclick="removeNode()">Удалить узел</button>
+        <div class="tree" id="tree">
+            <ul>
+                <li class="expanded">Корень
+                    <ul>
+                        <li class="expanded">Папка 1
+                            <ul>
+                                <li>Файл 1</li>
+                                <li>Файл 2</li>
+                            </ul>
+                        </li>
+                        <li class="collapsed">Папка 2
+                            <ul>
+                                <li>Файл 3</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Сортировка списка -->
+    <div class="section">
+        <h2>Сортировка списка</h2>
+        <ul class="sortable-list" id="sortableList">
+            <li>Яблоко</li>
+            <li>Банан</li>
+            <li>Груша</li>
+        </ul>
+        <button onclick="sortAlphabetically()">По алфавиту</button>
+        <button onclick="sortReverse()">Обратная сортировка</button>
+        <button onclick="shuffle()">Перемешать</button>
+    </div>
+
+    <!-- Конструктор блоков -->
+    <div class="section">
+        <h2>Конструктор блоков</h2>
+        <button onclick="addTextBlock()">Добавить текст</button>
+        <button onclick="addImageBlock()">Добавить изображение</button>
+        <div class="block-container" id="blockContainer"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

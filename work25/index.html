@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Медиа Приложения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #8E2DE2;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(142, 45, 226, 0.1);
+        }
+        h2 {
+            color: #8E2DE2;
+            margin-top: 0;
+        }
+        video, audio {
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button, input[type="range"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover, input[type="range"]:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #A349F5, #6A00FF);
+        }
+        .controls {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        #chatContainer {
+            display: flex;
+            gap: 20px;
+        }
+        #chatBox {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        #chatInput {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Аудио-плеер с плейлистом -->
+    <div class="section">
+        <h2>Аудио-плеер</h2>
+        <audio id="audioPlayer" controls></audio>
+        <div class="controls">
+            <button onclick="prevTrack()">Предыдущий</button>
+            <button onclick="nextTrack()">Следующий</button>
+            <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+        </div>
+        <div id="audioResult" class="result"></div>
+    </div>
+
+    <!-- Видео-редактор -->
+    <div class="section">
+        <h2>Видео-редактор</h2>
+        <video id="videoEditor" controls></video>
+        <div class="controls">
+            <button onclick="speedUp()">Ускорить (x2)</button>
+            <button onclick="slowDown()">Замедлить (x0.5)</button>
+            <button onclick="takeScreenshot()">Скриншот</button>
+            <input type="range" id="videoVolume" min="0" max="1" step="0.1" value="1">
+            <input type="range" id="videoBrightness" min="0" max="2" step="0.1" value="1">
+        </div>
+        <div id="videoResult" class="result"></div>
+    </div>
+
+    <!-- Видео-чат -->
+    <div class="section">
+        <h2>Видео-чат</h2>
+        <div id="chatContainer">
+            <video id="localVideo" autoplay muted></video>
+            <video id="remoteVideo" autoplay></video>
+            <div>
+                <button onclick="toggleMic()">Откл. микрофон</button>
+                <button onclick="toggleCamera()">Откл. камеру</button>
+                <div id="chatBox"></div>
+                <input type="text" id="chatInput" placeholder="Введите сообщение">
+                <button onclick="sendMessage()">Отправить</button>
+            </div>
+        </div>
+        <div id="chatResult" class="result"></div>
+    </div>
+
+    <!-- Интерактивное видео -->
+    <div class="section">
+        <h2>Интерактивное видео</h2>
+        <video id="interactiveVideo" controls></video>
+        <div id="choiceContainer" class="controls"></div>
+        <div id="progressResult" class="result"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

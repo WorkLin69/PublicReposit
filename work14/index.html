@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Текстовый редактор, Таблица, Поиск и Контекстное меню</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #editor {
+            border: 1px solid #ccc;
+            min-height: 100px;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr.selected {
+            background: #e0f7fa;
+        }
+        td.selected {
+            background: #b3e5fc;
+        }
+        .highlight {
+            background: yellow;
+        }
+        .context-menu {
+            position: absolute;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+        }
+        .context-menu div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .context-menu div:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Текстовый редактор -->
+    <div class="section">
+        <h2>Текстовый редактор</h2>
+        <button onclick="formatText('bold')">Жирный</button>
+        <button onclick="formatText('italic')">Курсив</button>
+        <button onclick="createLink()">Создать ссылку</button>
+        <button onclick="undo()">Отмена</button>
+        <div id="editor" contenteditable="true">Введите текст...</div>
+    </div>
+
+    <!-- Выделение таблицы -->
+    <div class="section">
+        <h2>Выделение таблицы</h2>
+        <button onclick="copySelected()">Копировать</button>
+        <button onclick="deleteSelected()">Удалить</button>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Колонка 1</th>
+                    <th>Колонка 2</th>
+                    <th>Колонка 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Данные 1</td>
+                    <td>Данные 2</td>
+                    <td>Данные 3</td>
+                </tr>
+                <tr>
+                    <td>Данные 4</td>
+                    <td>Данные 5</td>
+                    <td>Данные 6</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Поиск по странице -->
+    <div class="section">
+        <h2>Поиск по странице</h2>
+        <input type="text" id="searchInput" placeholder="Введите текст для поиска">
+        <button onclick="searchText()">Найти</button>
+        <button onclick="prevMatch()">Назад</button>
+        <button onclick="nextMatch()">Вперед</button>
+        <div id="content">
+            <p>Пример текста для поиска. Тестовый текст.</p>
+            <p>Ещё один пример текста. Тестовый контент.</p>
+        </div>
+    </div>
+
+    <!-- Кастомное контекстное меню -->
+    <div class="section">
+        <h2>Кастомное контекстное меню</h2>
+        <p>Выделите текст ниже и нажмите правой кнопкой мыши:</p>
+        <div id="textArea">Этот текст можно выделить для вызова контекстного меню.</div>
+        <div class="context-menu" id="contextMenu"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

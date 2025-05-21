@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #8E2DE2;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(142, 45, 226, 0.1);
+        }
+        h2 {
+            color: #8E2DE2;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #8E2DE2;
+            outline: none;
+        }
+        button {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #A349F5, #6A00FF);
+        }
+        .error {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .progress {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            transition: background 0.3s;
+        }
+        .step.active {
+            background: #8E2DE2;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        #loginOutput, #orderOutput, #userOutput, #multiStepOutput {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Форма входа -->
+    <div class="section">
+        <h2>Форма входа</h2>
+        <form id="loginForm">
+            <div>
+                <label for="login">Логин:</label>
+                <input type="text" id="login" required>
+                <div class="error" id="loginError"></div>
+            </div>
+            <div>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+            <div>
+                <label><input type="checkbox" id="rememberMe"> Запомнить меня</label>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        <div id="loginOutput"></div>
+    </div>
+
+    <!-- Форма оформления заказа -->
+    <div class="section">
+        <h2>Форма заказа</h2>
+        <form id="orderForm">
+            <div>
+                <label for="fullName">ФИО:</label>
+                <input type="text" id="fullName" required>
+            </div>
+            <div>
+                <label for="address">Адрес:</label>
+                <input type="text" id="address" required>
+            </div>
+            <div>
+                <label for="phone">Телефон:</label>
+                <input type="tel" id="phone" required pattern="[0-9]{10}">
+            </div>
+            <div>
+                <label for="orderEmail">Email:</label>
+                <input type="email" id="orderEmail" required>
+            </div>
+            <div>
+                <label>Способ оплаты:</label>
+                <label><input type="radio" name="payment" value="card" required> Карта</label>
+                <label><input type="radio" name="payment" value="cash"> Наличные</label>
+            </div>
+            <div>
+                <label for="comment">Комментарий:</label>
+                <textarea id="comment" rows="3"></textarea>
+            </div>
+            <button type="submit">Отправить заказ</button>
+        </form>
+        <div id="orderOutput"></div>
+    </div>
+
+    <!-- Анкета пользователя -->
+    <div class="section">
+        <h2>Анкета пользователя</h2>
+        <form id="userForm">
+            <div>
+                <label for="photo">Фото:</label>
+                <input type="file" id="photo" accept="image/*">
+            </div>
+            <div>
+                <label for="education">Образование:</label>
+                <select id="education">
+                    <option value="school">Среднее</option>
+                    <option value="bachelor">Бакалавр</option>
+                    <option value="master">Магистр</option>
+                </select>
+            </div>
+            <div>
+                <label>Навыки:</label>
+                <label><input type="checkbox" name="skills" value="html"> HTML</label>
+                <label><input type="checkbox" name="skills" value="css"> CSS</label>
+                <label><input type="checkbox" name="skills" value="js"> JavaScript</label>
+            </div>
+            <div>
+                <label for="about">О себе:</label>
+                <textarea id="about" rows="4"></textarea>
+            </div>
+            <button type="submit">Сохранить</button>
+            <button type="button" onclick="document.getElementById('userForm').reset()">Отмена</button>
+        </form>
+        <div id="userOutput"></div>
+    </div>
+
+    <!-- Многостраничная форма -->
+    <div class="section">
+        <h2>Многостраничная форма</h2>
+        <div class="progress" id="progress">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+        </div>
+        <form id="multiStepForm">
+            <div class="form-step active" id="step1">
+                <div>
+                    <label for="step1Name">Имя:</label>
+                    <input type="text" id="step1Name" required>
+                </div>
+                <button type="button" onclick="nextStep(2)">Далее</button>
+            </div>
+            <div class="form-step" id="step2">
+                <div>
+                    <label for="step2Email">Email:</label>
+                    <input type="email" id="step2Email" required>
+                </div>
+                <button type="button" onclick="prevStep(1)">Назад</button>
+                <button type="button" onclick="nextStep(3)">Далее</button>
+            </div>
+            <div class="form-step" id="step3">
+                <div>
+                    <label for="step3Phone">Телефон:</label>
+                    <input type="tel" id="step3Phone" required pattern="[0-9]{10}">
+                </div>
+                <button type="button" onclick="prevStep(2)">Назад</button>
+                <button type="submit">Завершить</button>
+            </div>
+        </form>
+        <div id="multiStepOutput"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация и Заказы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #8E2DE2;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(142, 45, 226, 0.1);
+        }
+        h2 {
+            color: #8E2DE2;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus {
+            border-color: #8E2DE2;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #A349F5, #6A00FF);
+        }
+        .error {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .password-strength {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        .progress {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            transition: background 0.3s;
+        }
+        .step.active {
+            background: #8E2DE2;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Форма регистрации с валидацией -->
+    <div class="section">
+        <h2>Форма регистрации</h2>
+        <form id="regForm">
+            <div>
+                <label for="regName">Имя:</label>
+                <input type="text" id="regName" required pattern="[A-Za-zА-Яа-яЁё\s]{2,}">
+                <div class="error" id="regNameError"></div>
+            </div>
+            <div>
+                <label for="regEmail">Email:</label>
+                <input type="email" id="regEmail" required>
+                <div class="error" id="regEmailError"></div>
+            </div>
+            <div>
+                <label for="regPassword">Пароль:</label>
+                <input type="password" id="regPassword" required>
+                <div class="password-strength" id="passwordStrength"></div>
+                <div class="error" id="regPasswordError"></div>
+            </div>
+            <div>
+                <label for="regConfirm">Подтверждение пароля:</label>
+                <input type="password" id="regConfirm" required>
+                <div class="error" id="regConfirmError"></div>
+            </div>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <div id="regResult" class="result"></div>
+    </div>
+
+    <!-- Форма заказа с динамической валидацией -->
+    <div class="section">
+        <h2>Форма заказа</h2>
+        <form id="orderForm">
+            <div>
+                <label for="orderQuantity">Количество (1-10):</label>
+                <input type="number" id="orderQuantity" min="1" max="10" required>
+                <div class="error" id="orderQuantityError"></div>
+            </div>
+            <div>
+                <label for="orderPromo">Промокод (SUMMER2025):</label>
+                <input type="text" id="orderPromo" pattern="^SUMMER2023$">
+                <div class="error" id="orderPromoError"></div>
+            </div>
+            <div>
+                <label for="orderEmail">Email для чека:</label>
+                <input type="email" id="orderEmail" required>
+                <div class="error" id="orderEmailError"></div>
+            </div>
+            <button type="submit">Оформить заказ</button>
+        </form>
+        <div id="orderResult" class="result"></div>
+    </div>
+
+    <!-- Многошаговая форма с валидацией -->
+    <div class="section">
+        <h2>Многошаговая форма</h2>
+        <div class="progress" id="multiProgress">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+        </div>
+        <form id="multiForm">
+            <div class="form-step active" id="multiStep1">
+                <h3>Личные данные</h3>
+                <div>
+                    <label for="multiName">Имя:</label>
+                    <input type="text" id="multiName" required pattern="[A-Za-zА-Яа-яЁё\s]{2,}">
+                    <div class="error" id="multiNameError"></div>
+                </div>
+                <button type="button" onclick="nextMultiStep(2)">Далее</button>
+            </div>
+            <div class="form-step" id="multiStep2">
+                <h3>Адрес</h3>
+                <div>
+                    <label for="multiAddress">Адрес:</label>
+                    <input type="text" id="multiAddress" required>
+                    <div class="error" id="multiAddressError"></div>
+                </div>
+                <button type="button" onclick="prevMultiStep(1)">Назад</button>
+                <button type="button" onclick="nextMultiStep(3)">Далее</button>
+            </div>
+            <div class="form-step" id="multiStep3">
+                <h3>Оплата</h3>
+                <div>
+                    <label for="multiPayment">Способ оплаты:</label>
+                    <select id="multiPayment" required>
+                        <option value="">Выберите</option>
+                        <option value="card">Карта</option>
+                        <option value="cash">Наличные</option>
+                    </select>
+                    <div class="error" id="multiPaymentError"></div>
+                </div>
+                <button type="button" onclick="prevMultiStep(2)">Назад</button>
+                <button type="submit">Завершить</button>
+            </div>
+        </form>
+        <div id="multiResult" class="result"></div>
+    </div>
+
+    <!-- Кастомный валидатор -->
+    <div class="section">
+        <h2>Кастомный валидатор</h2>
+        <div>
+            <label for="innInput">ИНН:</label>
+            <input type="text" id="innInput" placeholder="1234567890 или 123456789012">
+            <button onclick="validateINN()">Проверить</button>
+            <div id="innResult" class="result"></div>
+        </div>
+        <div>
+            <label for="snilsInput">СНИЛС:</label>
+            <input type="text" id="snilsInput" placeholder="123-456-789 01">
+            <button onclick="validateSnils()">Проверить</button>
+            <div id="snilsResult" class="result"></div>
+        </div>
+        <div>
+            <label for="bikInput">БИК:</label>
+            <input type="text" id="bikInput" placeholder="044525225">
+            <button onclick="validateBIK()">Проверить</button>
+            <div id="bikResult" class="result"></div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактируемый список, Темы, Валидация и Галерея</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #ff00f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff00f2;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 10px;
+            background: #f0f0f0;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .dark-theme {
+            background: #333;
+            color: #fff;
+        }
+        .dark-theme li {
+            background: #555;
+        }
+        .invalid {
+            border: 2px solid red;
+        }
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            border: 2px solid #ccc;
+        }
+        #mainImage {
+            max-width: 400px;
+            max-height: 400px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="section">
+        <h2>Редактируемый список</h2>
+        <ul id="editableList">
+            <li>Элемент 1</li>
+            <li>Элемент 2</li>
+            <li>Элемент 3</li>
+        </ul>
+        <button onclick="addItem()">Добавить</button>
+        <button onclick="removeItem()">Удалить</button>
+    </div>
+
+    
+    <div class="section">
+        <h2>Переключатель тем</h2>
+        <button onclick="toggleTheme()">Сменить тему</button>
+    </div>
+
+    
+    <div class="section">
+        <h2>Валидация формы</h2>
+        <div>
+            <label for="username">Имя (мин. 3 символа):</label><br>
+            <input type="text" id="username" required>
+        </div>
+        <div>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" required>
+        </div>
+        <button onclick="submitForm()">Отправить</button>
+        <p id="formOutput"></p>
+    </div>
+
+    
+    <div class="section">
+        <h2>Галерея изображений</h2>
+        <div class="gallery-thumbnails">
+            <img class="thumbnail" src="./img/picture1.jpg" alt="Image 1">
+            <img class="thumbnail" src="./img/picture2.jpg" alt="Image 2">
+            <img class="thumbnail" src="./img/picture3.jpg" alt="Image 3">
+        </div>
+        <img id="mainImage" src="https://via.placeholder.com/400?text=Main" alt="Main Image">
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

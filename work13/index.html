@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менеджер ссылок, Анализатор и Модификатор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            transition: background 0.3s, color 0.3s;
+        }
+        .section {
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .links-list {
+            list-style: none;
+            padding: 0;
+        }
+        .links-list li {
+            padding: 5px 0;
+        }
+        .links-list a {
+            margin-right: 10px;
+        }
+        .links-list a.external {
+            color: #ff4500;
+        }
+        .toc {
+            padding: 10px;
+            background: #f9f9f9;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        .night-mode {
+            background: #1a1a1a;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Менеджер ссылок -->
+    <div class="section">
+        <h2>Менеджер ссылок</h2>
+        <input type="text" id="linkInput" placeholder="Введите URL">
+        <button onclick="addLink()">Добавить ссылку</button>
+        <ul class="links-list" id="linksList"></ul>
+        <button onclick="openAllLinks()">Открыть все в новом окне</button>
+    </div>
+
+    <!-- Анализатор страницы -->
+    <div class="section">
+        <h2>Анализатор страницы</h2>
+        <button onclick="analyzePage()">Анализировать</button>
+        <p id="analysisOutput"></p>
+    </div>
+
+    <!-- Генератор оглавления -->
+    <div class="section">
+        <h2>Оглавление</h2>
+        <div class="toc" id="tableOfContents"></div>
+    </div>
+
+    <!-- Модификатор страницы -->
+    <div class="section">
+        <h2>Модификатор страницы</h2>
+        <button onclick="changeBackground()">Изменить фон</button>
+        <button onclick="increaseFont()">Увеличить шрифт</button>
+        <button onclick="decreaseFont()">Уменьшить шрифт</button>
+        <button onclick="toggleMode()">День/Ночь</button>
+    </div>
+
+    <h2 id="section1">Раздел 1</h2>
+    <p>Текст раздела 1.</p>
+    <h3 id="subsection1">Подраздел 1.1</h3>
+    <p>Текст подраздела 1.1.</p>
+    <h2 id="section2">Раздел 2</h2>
+    <p>Текст раздела 2.</p>
+    <h3 id="subsection2">Подраздел 2.1</h3>
+    <p>Текст подраздела 2.1.</p>
+
+    <script src="./script.js"></script>
+</body>
+</html>

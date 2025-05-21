@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пользовательская система</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: font-size 0.3s, color 0.3s, background-color 0.3s;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #8E2DE2;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(142, 45, 226, 0.1);
+        }
+        h2 {
+            color: #8E2DE2;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus {
+            border-color: #8E2DE2;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #A349F5, #6A00FF);
+        }
+        .error {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .cart-item {
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #363434;
+            border-radius: 4px;
+        }
+        #cartCount {
+            font-weight: bold;
+            color: #8E2DE2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Система запоминания пользователя -->
+    <div class="section">
+        <h2>Форма входа</h2>
+        <form id="loginForm">
+            <div>
+                <label for="loginUsername">Логин:</label>
+                <input type="text" id="loginUsername" required>
+                <div class="error" id="loginUsernameError"></div>
+            </div>
+            <div>
+                <label for="loginPassword">Пароль:</label>
+                <input type="password" id="loginPassword" required>
+                <div class="error" id="loginPasswordError"></div>
+            </div>
+            <div>
+                <label><input type="checkbox" id="rememberMe"> Запомнить меня</label>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        <div id="loginResult" class="result"></div>
+    </div>
+
+    <!-- Персонализация сайта -->
+    <div class="section">
+        <h2>Настройки</h2>
+        <form id="settingsForm">
+            <div>
+                <label for="fontSize">Размер шрифта:</label>
+                <select id="fontSize">
+                    <option value="12">12px</option>
+                    <option value="16">16px</option>
+                    <option value="20">20px</option>
+                </select>
+            </div>
+            <div>
+                <label for="theme">Цветовая схема:</label>
+                <select id="theme">
+                    <option value="light">Светлая</option>
+                    <option value="dark">Тёмная</option>
+                </select>
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+
+    <!-- Анализ поведения пользователя -->
+    <div class="section">
+        <h2>Анализ поведения</h2>
+        <div id="behaviorResult" class="result"></div>
+    </div>
+
+    <!-- Корзина интернет-магазина -->
+    <div class="section">
+        <h2>Корзина</h2>
+        <button onclick="addToCart('Товар 1', 10)">Добавить Товар 1</button>
+        <button onclick="addToCart('Товар 2', 20)">Добавить Товар 2</button>
+        <div id="cartItems"></div>
+        <div>Товаров в корзине: <span id="cartCount">0</span></div>
+        <button onclick="clearCart()">Очистить корзину</button>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

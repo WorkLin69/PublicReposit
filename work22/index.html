@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <title>Анализ и Авторизация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: all 0.3s;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #8E2DE2;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(142, 45, 226, 0.1);
+        }
+        h2 {
+            color: #8E2DE2;
+            margin-top: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border-color: #8E2DE2;
+            outline: none;
+        }
+        button {
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #A349F5, #6A00FF);
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+        .error {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Безопасная авторизация -->
+    <div class="section">
+        <h2>Форма входа</h2>
+        <form id="loginForm">
+            <div>
+                <label for="username">Логин:</label>
+                <input type="text" id="username" required>
+                <div class="error" id="usernameError"></div>
+            </div>
+            <div>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        <div id="loginResult" class="result"></div>
+    </div>
+
+    <!-- Миграция с cookies на localStorage -->
+    <div class="section">
+        <h2>Миграция настроек</h2>
+        <button onclick="migrateSettings()">Мигрировать настройки</button>
+        <div id="migrationResult" class="result"></div>
+    </div>
+
+    <!-- Гибридное хранилище -->
+    <div class="section">
+        <h2>Гибридное хранилище</h2>
+        <form id="hybridForm">
+            <div>
+                <label for="token">Токен (критичные данные):</label>
+                <input type="text" id="token" required>
+                <div class="error" id="tokenError"></div>
+            </div>
+            <div>
+                <label for="fontSize">Размер шрифта (UI):</label>
+                <input type="number" id="fontSize" min="12" max="20" required>
+                <div class="error" id="fontSizeError"></div>
+            </div>
+            <div>
+                <label for="tempData">Временные данные:</label>
+                <input type="text" id="tempData">
+                <div class="error" id="tempDataError"></div>
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
+        <div id="hybridResult" class="result"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

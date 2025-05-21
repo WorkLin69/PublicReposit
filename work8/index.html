@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM и BOM Задания</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #adaptiveBlock {
+            width: 100%;
+            height: 100px;
+            background-color: #e0e0e0;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="section">
+        <h2>Таймер</h2>
+        <button id="startTimerBtn">Запустить таймер</button>
+        <p>Секунды: <span id="timerOutput">0</span></p>
+    </div>
+
+   
+    <div class="section">
+        <h2>Адаптация стилей</h2>
+        <p>Ширина экрана: <span id="screenWidth"></span>px</p>
+        <div id="adaptiveBlock">Блок для адаптации</div>
+    </div>
+
+ 
+    <div class="section">
+        <h2>История посещений</h2>
+        <button id="addHistoryBtn">Добавить в историю</button>
+        <button id="goBackBtn">Назад</button>
+        <p id="pageContent">Начальная страница</p>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

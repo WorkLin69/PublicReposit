@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамические формы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #8E2DE2;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(142, 45, 226, 0.1);
+        }
+        h2, h3 {
+            color: #8E2DE2;
+            margin-top: 0;
+        }
+        .field {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        button {
+            padding: 10px;
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #A349F5, #6A00FF);
+        }
+        select, input, textarea {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+        select:focus, input:focus, textarea:focus {
+            border-color: #8E2DE2;
+            outline: none;
+        }
+        .error {
+            color: #D32F2F;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .progress {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            transition: background 0.3s;
+        }
+        .step.active {
+            background: #8E2DE2;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        #preview {
+            max-width: 100px;
+            margin-top: 10px;
+            border: 2px solid #8E2DE2;
+            border-radius: 4px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+        #formCode, #regOutput, #cityOutput, #avatarOutput {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="section">
+        <h2>Конструктор форм</h2>
+        <select id="fieldType">
+            <option value="text">Текст</option>
+            <option value="number">Число</option>
+            <option value="select">Выбор</option>
+        </select>
+        <button onclick="addField()">Добавить поле</button>
+        <button onclick="generateForm()">Сгенерировать HTML</button>
+        <div id="formBuilder"></div>
+        <textarea id="formCode" rows="5" style="width: 100%; margin-top: 10px;"></textarea>
+    </div>
+
+    
+    <div class="section">
+        <h2>Регистрация</h2>
+        <div class="progress" id="regProgress">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+        </div>
+        <form id="regForm">
+            <div class="form-step active" id="regStep1">
+                <h3>Личные данные</h3>
+                <div>
+                    <label for="regName">Имя:</label>
+                    <input type="text" id="regName" required>
+                    <div class="error" id="regNameError"></div>
+                </div>
+                <button type="button" onclick="nextRegStep(2)">Далее</button>
+            </div>
+            <div class="form-step" id="regStep2">
+                <h3>Контакты</h3>
+                <div>
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" required>
+                    <div class="error" id="regEmailError"></div>
+                </div>
+                <button type="button" onclick="prevRegStep(1)">Назад</button>
+                <button type="button" onclick="nextRegStep(3)">Далее</button>
+            </div>
+            <div class="form-step" id="regStep3">
+                <h3>Настройки</h3>
+                <div>
+                    <label for="regNotifications">Уведомления:</label>
+                    <select id="regNotifications">
+                        <option value="yes">Да</option>
+                        <option value="no">Нет</option>
+                    </select>
+                </div>
+                <button type="button" onclick="prevRegStep(2)">Назад</button>
+                <button type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+        <div id="regOutput"></div>
+    </div>
+
+   
+    <div class="section">
+        <h2>Форма с зависимостью полей</h2>
+        <form id="cityForm">
+            <div>
+                <label for="country">Страна:</label>
+                <select id="country" onchange="loadCities()">
+                    <option value="">Выберите страну</option>
+                    <option value="russia">Россия</option>
+                    <option value="usa">США</option>
+                </select>
+            </div>
+            <div>
+                <label for="city">Город:</label>
+                <select id="city">
+                    <option value="">Сначала выберите страну</option>
+                </select>
+            </div>
+            <button type="submit">Отправить</button>
+        </form>
+        <div id="cityOutput"></div>
+    </div>
+
+   
+    <div class="section">
+        <h2>Форма с превью изображения</h2>
+        <form id="avatarForm">
+            <div>
+                <label for="avatar">Аватар:</label>
+                <input type="file" id="avatar" accept="image/*">
+                <div class="error" id="avatarError"></div>
+                <img id="preview" src="" alt="Превью">
+            </div>
+            <button type="submit">Отправить</button>
+        </form>
+        <div id="avatarOutput"></div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

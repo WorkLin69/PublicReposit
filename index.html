@@ -83,14 +83,17 @@
 </head>
 <body>
 
-    <button onclick="toggleBackground()">Переключить фон</button>
+<button id="toggleBtn">Переключить фон</button>
 
-    <div class="input-container">
-        <input type="text" id="textInput" placeholder="Введите текст">
-        <p class="length-display">Длинная текста: <span id="textLength">0</span> </p>
-    </div>
+  <!-- Поле ввода и отображение длины -->
+  <div class="input-container">
+    <input type="text" id="textInput" placeholder="Введите текст">
+    <p class="length-display">Длина текста: <span id="textLength">0</span></p>
+  </div>
 
-    <div class="highlight-box">Milka</div>
+  <!-- Блок Milka -->
+  <div class="highlight-box">Milka</div>
+
 
     <script src="./js/script.js"></script>
 

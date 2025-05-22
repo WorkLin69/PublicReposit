@@ -5,30 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
     <style>
+        /* Базовые стили для элементов */
         body {
-            font-size: 16px;
+            transition: font-size 0.3s ease;
+            padding: 20px;
+            font-family: Arial, sans-serif;
         }
+        
         #textBlock {
-            width: 200px;
-            height: 100px;
+            padding: 15px;
+            margin: 20px 0;
             background-color: lightblue;
-            margin: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
+
         .error {
-            border: 2px solid red;
+            border: 2px solid red !important;
+            animation: shake 0.5s;
         }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
         form {
-            margin: 20px;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <button onclick="toggleTextSize()">Переключить размер текста</button>
-    <div id="textBlock"></div>
+   <button id="toggleSizeBtn">Переключить размер текста</button>
+
+    <div id="textBlock">Наведи на меня</div>
+
     <form>
-        <input type="text" id="inputField" placeholder="Введите данные">
-        <button type="submit" onclick="validateInput(event)">Отправить</button>
+        <input 
+            type="text" 
+            id="inputField" 
+            placeholder="Введите данные"
+            aria-label="Поле ввода данных"
+        >
+        <button type="submit">Отправить</button>
     </form>
+
 
     <script src="./script.js"></script>
 </body>

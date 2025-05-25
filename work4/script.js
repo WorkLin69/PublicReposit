@@ -18,6 +18,7 @@
         });
 
         // Ленивая загрузка
+        // Элементы загружаются тогда, когда это действительно нужно.
         const images = document.querySelectorAll('.lazy'); // Инициализация элементов для ленивой загрузки
         const observer = new IntersectionObserver((entries, observer) => { // Современный API браузеров отслеживающий видимость области
             entries.forEach(entry => {
@@ -76,7 +77,7 @@
 
         // Обработка переходов
         sliderImages.addEventListener('transitionend', () => { //ransitionend: Срабатывает после завершения CSS-анимации Сбрасывает индекс при выходе за границы
-            if (currentSlide === slideData.length) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = slideData.length - 1;
-            updateSlide();
+            if (currentSlide === slideData.length) currentSlide = 0; //Если индекс слайда (currentSlide) равен длине массива slideData (например, 3 для массива из 3 элементов), он сбрасывается на 0.
+            if (currentSlide < 0) currentSlide = slideData.length - 1; // сли индекс становится отрицательным (например, -1), он устанавливается на последний слайд.
+            updateSlide(); //Обновляет
         });

@@ -7,19 +7,19 @@
             { src: 'img/picture1.jpg', caption: 'Изображение 4' }
         ];
 
-        imageData.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'gallery-item';
+        imageData.forEach(item => { // Перебираем массив изображений для каждого элемента массива imageData
+            const div = document.createElement('div'); //Создаём контейнер для элемента галереи
+            div.className = 'gallery-item'; // Добавляем класс к контейнеру
             div.innerHTML = `
                 <img src="" data-src="${item.src}" class="lazy" loading="lazy" alt="${item.caption}">
                 <div class="caption">${item.caption}</div>
             `;
-            gallery.appendChild(div);
+            gallery.appendChild(div); // Готовый <div class="gallery-item"> добавляется в контейнер gallery.
         });
 
         // Ленивая загрузка
-        const images = document.querySelectorAll('.lazy');
-        const observer = new IntersectionObserver((entries, observer) => {
+        const images = document.querySelectorAll('.lazy'); // Инициализация элементов для ленивой загрузки
+        const observer = new IntersectionObserver((entries, observer) => { // Современный API браузеров отслеживающий видимость области
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
@@ -28,7 +28,7 @@
                     observer.unobserve(img);
                 }
             });
-        }, { rootMargin: '50px' });
+        }, { rootMargin: '50px' }); // Создаёт "буферную зону" вокруг вьюпорта
 
         images.forEach(img => observer.observe(img));
 
@@ -62,20 +62,20 @@
         }
 
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % slideData.length;
+            currentSlide = (currentSlide + 1) % slideData.length; //Увеличивает индекс на 1 и за счет этого слайд перелистывается
             updateSlide();
         }
 
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + slideData.length) % slideData.length;
+            currentSlide = (currentSlide - 1 + slideData.length) % slideData.length; //Уменьшает индекс на 1 и за счет этого слайд перелистывается
             updateSlide();
         }
 
         
-        setInterval(nextSlide, 2000);
+        setInterval(nextSlide, 2000); //автопрокруутка
 
         // Обработка переходов
-        sliderImages.addEventListener('transitionend', () => {
+        sliderImages.addEventListener('transitionend', () => { //ransitionend: Срабатывает после завершения CSS-анимации Сбрасывает индекс при выходе за границы
             if (currentSlide === slideData.length) currentSlide = 0;
             if (currentSlide < 0) currentSlide = slideData.length - 1;
             updateSlide();

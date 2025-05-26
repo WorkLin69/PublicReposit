@@ -30,7 +30,7 @@
 
             // Отправка при успехе
             if (ok) {
-                let time = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/' });
+                let time = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
                 formOutput.textContent = `Отправлено в ${time}: Имя: ${username.value}, Email: ${email.value}, Возраст: ${ageNum}`;
                 form.reset();
             }
